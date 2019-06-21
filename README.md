@@ -22,7 +22,7 @@ full node ansible script
 ### next
 - randomly generate RPC user/pass
 - checksums? verify code?
-- electrumx for https://github.com/chris-belcher/electrum-personal-server
+- replace electrumx (wtf big blocks? no sensible default for COIN?) with https://github.com/chris-belcher/electrum-personal-server
 - tor https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md
 
 
@@ -49,6 +49,18 @@ Node Launcher is a GUI for a desktop or laptop. It needs a screen.
 
 Sovbox works on any Linux machine with enough disk space, no need for a screen.
 No need to run this in your own house even, as you can rent a dedicated or cloud server.
+
+### Who may want to use it?
+
+Someone who wants a full node but doesn't want to keep it running at home, e.g. nomads or students living in a dorm.
+
+Someone who wants to use an old machine for this, instead of buying something new and fancy like Nodl or a [Casa Node](https://keys.casa/).
+
+Someone who wants to know more precisely what software is running.
+
+### Will there be a GUI?
+
+Maybe later.
 
 
 ## Useful resources
