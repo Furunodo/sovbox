@@ -57,11 +57,11 @@ to trust third parties
 - [x] role: Bitcoin full node
 - [x] role: ElectrumX
 - [x] mostly works on Ubuntu 18 LTS
+- [x] randomly generate RPC user/pass
 - [ ] testing on different machines
-- [ ] randomly generate RPC user/pass
+- [ ] role: [Trezor full node](https://wiki.trezor.io/Full-node_wallet), with [Blockbook](https://wiki.trezor.io/User_manual-Running_a_local_instance_of_Trezor_Wallet_backend_(Blockbook))
 - [ ] checksums? verify code?
 - [ ] more tor https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md
-- [ ] role: [Trezor full node](https://wiki.trezor.io/Full-node_wallet), with [Blockbook](https://wiki.trezor.io/User_manual-Running_a_local_instance_of_Trezor_Wallet_backend_(Blockbook))
 - [ ] role: [samurai dojo](https://github.com/Samourai-Wallet/samourai-dojo/blob/master/doc/DOCKER_setup.md)
 - [ ] role: [btcpayserver](https://github.com/btcpayserver/btcpayserver)
 - [ ] role: [lightning watchtower](https://medium.com/@wbobeirne/testing-out-watchtowers-with-a-simulated-breach-f1ad22c01112)?

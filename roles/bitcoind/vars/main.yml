@@ -1,0 +1,3 @@
+# Warning: random will return a different value every {{rpc_pass}} instance
+rpc_pass: "pass{{ 9999999999999999999999999 | random }}"
+rpc_user: "user{{ 9999999999999999999999999 | random }}"

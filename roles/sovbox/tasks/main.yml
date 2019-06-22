@@ -15,3 +15,12 @@
     enabled: yes
   tags:
   - sovbox
+
+- name: Upgrade packages
+  apt:
+    upgrade: dist
+    update-cache: yes
+
+- name: Install system packages
+  apt: pkg={{ item }}
+  with_items: "{{ system_apt_packages }}"
