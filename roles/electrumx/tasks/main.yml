@@ -1,0 +1,76 @@
+---
+-
+- name: create electrumx user
+  user:
+    name: electrumx
+    home: /home/electrumx
+    state: present
+  tags:
+    - systemd
+    - electrumx
+
+- name: electrumx, pip install rocksdb
+  shell: pip3 install python-rocksdb
+  tags:
+    - electrumx
+
+- name: Git clone electrumx repo
+  git:
+    repo: https://github.com/kyuupichan/electrumx
+    dest: /home/electrumx/electrumx
+    version: 1.12.0
+    ## https://themerkle.com/electrumx-secretly-switches-to-bitcoin-cash-as-their-main-chain/
+  tags:
+    - electrumx
+
+- name: Build and install electrumx
+  shell: python3 setup.py install
+  args:
+    chdir: /home/electrumx/electrumx
+  tags:
+    - electrumx
+    
+- name: electrum db
+  file:
+    path: /var/lib/electrum-db
+    owner: electrumx
+    state: directory
+  tags:
+    - systemd
+    - electrumx
+        
+- name: copy Electrumx systemd conf
+  copy:
+    src: /home/electrumx/electrumx/contrib/systemd/electrumx.service
+    dest: /etc/systemd/system/electrumx.service
+    remote_src: yes
+  tags:
+    - systemd
+    - electrumx
+
+- name: create /etc/electrumx
+  file:
+    state: directory
+    path: /etc/electrumx
+  tags:
+    - electrumx
+    - etc
+
+- name: copy electrum conf
+  copy:
+    src: files/electrumx.conf.j2
+    dest: /etc/electrumx.conf
+  tags:
+    - etc
+    - electrumx
+
+- name: Set electrumx up as daemon, load at boottime
+  systemd:
+    name: electrumx
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+  tags:
+    - systemd
+    - electrum
+

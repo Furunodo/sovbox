@@ -1,0 +1,13 @@
+# default /etc/electrumx.conf for systemd
+
+# REQUIRED
+DB_DIRECTORY = /var/lib/electrumx-db
+
+# Bitcoin Node RPC Credentials
+DAEMON_URL = http://{{rpc_user}}:{{rpc_pass}}@127.0.0.1:8332/
+
+
+# Insanely painful that ElectrumX doesn't have sane defaults for COIN
+COIN=BitcoinSegwit
+
+# See http://electrumx.readthedocs.io/en/latest/environment.html

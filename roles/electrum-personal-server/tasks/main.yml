@@ -1,0 +1,73 @@
+---
+-
+- name: create electrum user
+  user:
+    name: electrum
+    home: /home/electrum
+    state: present
+  tags:
+    - systemd
+    - electrum
+
+- name: pip install rocksdb
+  shell: pip3 install python-rocksdb
+  tags:
+    - electrum
+
+- name: Git clone electrum-personal-server repo
+  git:
+    repo: https://github.com/chris-belcher/electrum-personal-server
+    dest: /home/electrum/electrum
+  tags:
+    - electrum
+
+- name: Build and install electrum-personal-server
+  shell: python3 setup.py install
+  args:
+    chdir: /home/electrum/electrum
+  tags:
+    - electrum
+    
+- name: electrum db
+  file:
+    path: /var/lib/electrum-db
+    owner: electrum
+    state: directory
+  tags:
+    - systemd
+    - electrum
+        
+- name: copy systemd conf
+  copy:
+    src: files/electrum.service
+    dest: /etc/systemd/system/electrum.service
+  tags:
+    - systemd
+    - electrum
+
+- name: create /etc/electrum
+  file:
+    state: directory
+    path: /etc/electrum
+  tags:
+    - electrum
+    - etc
+
+- name: copy electrum conf
+  copy:
+    src: files/config.ini
+    dest: /etc/electrum/config.ini
+  tags:
+    - etc
+    - electrum
+
+- name: restart electrum-personal-server
+  systemd:
+    name: electrum
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+  tags:
+    - systemd
+    - electrum
+

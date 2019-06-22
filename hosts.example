@@ -1,0 +1,2 @@
+[sovbox]
+yourmachine ansible_ssh_user=root

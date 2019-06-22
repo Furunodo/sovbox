@@ -1,0 +1,86 @@
+---
+-
+- name: Create bitcoind user, bitcoin core will run as bitcoind user
+  user:
+    name: bitcoind
+    state: present
+    home: /home/bitcoind
+  tags:
+    - systemd
+
+- name: Git clone the bitcoin repository
+  git:
+    repo: https://github.com/bitcoin/bitcoin
+    dest: /home/bitcoind/bitcoin
+    version: v0.18.0
+    # stable
+
+- name: bitcoin autogen.sh
+  shell: ./autogen.sh
+  args:
+    chdir: /home/bitcoind/bitcoin
+
+- name: bitcoin configure, without the GUI wallet
+  shell: ./configure --disable-wallet
+  args:
+    chdir: /home/bitcoind/bitcoin
+  tags:
+    - btcconf
+
+- name: make bitcoin, compile the code, with as many cores as your processor
+  shell: make -j $(nproc)
+  args:
+    chdir: /home/bitcoind/bitcoin
+  tags:
+    - make
+
+- name: make install bitcoin, install the complied code onto your machine
+  shell: make install
+  args:
+    chdir: /home/bitcoind/bitcoin
+  tags:
+    - make
+
+- name: Create bitcoind data directory
+  file:
+    path: /var/lib/bitcoind
+    owner: bitcoin
+    state: directory
+  tags:
+    - systemd
+
+
+- name: systemd conf
+  copy:
+    src: files/bitcoind.service
+    dest: /etc/systemd/system/bitcoind.service
+  tags:
+    - systemd
+
+- name: /etc/bitcoin
+  file:
+    state: directory
+    path: /etc/bitcoin
+    owner: bitcoind
+  tags:
+    - systemd
+
+- name: bitcoin.conf.j2
+  template:
+    src: files/bitcoin.conf.j2
+    dest: /etc/bitcoin/bitcoin.conf
+  tags:
+    - conf
+    - systemd
+
+
+- name: restart bitcoind
+  systemd:
+    name: bitcoind
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+  tags:
+    - systemd
+        
+

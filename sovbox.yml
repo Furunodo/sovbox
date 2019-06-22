@@ -1,0 +1,53 @@
+---
+- name: sovbox
+  hosts: sovbox
+  become: yes
+
+  vars:
+    # @todo move this to roles
+    system_apt_packages:
+      - aptitude
+      - git
+      - build-essential
+      - autoconf
+      - libtool
+      - pkg-config
+      - libboost-all-dev
+      - libssl-dev
+      - libprotobuf-dev
+      - protobuf-compiler
+      - libevent-dev
+      - python3-setuptools
+      - python3-pip
+      - libbz2-dev
+      - liblz4-dev
+      - libsnappy-dev
+    rpc_pass: "pass{{ 9999999999999999999999999 | random }}"
+    rpc_user: "user{{ 9999999999999999999999999 | random }}"
+    
+  roles:
+    - bitcoind
+    - electrumx
+
+  tasks:
+    - name: Upgrade packages
+      apt:
+        upgrade: dist
+        update-cache: yes
+
+    - name: Install system packages
+      apt: pkg={{ item }}
+      with_items: "{{ system_apt_packages }}"
+
+# @todo move to sovbox role
+    - name: Disable empty password login
+      lineinfile: dest=/etc/ssh/sshd_config regexp="^#?PermitEmptyPasswords" line="PermitEmptyPasswords no"
+      # notify: restart sshd
+      
+    - name: print rpc_pass
+      debug: var=rpc_pass
+
+    - name: print rpc_user
+      debug: var=rpc_user
+
+    
