@@ -56,15 +56,42 @@
     - electrumx
     - etc
 
+- name: extract rpc user and password from /etc/bitcoin/bitcoin.conf
+  slurp:
+    src: /etc/bitcoin/bitcoin.conf
+  register: bitcoinconf
+  tags:
+  - rpc
+  - electrumx
+  - rpcelx
+
+- name: debug
+  set_fact:
+    rpc_pass: "{{ bitcoinconf['content'] | b64decode | regex_search('password=(.*)') | regex_replace('password=', '') }}"
+  tags: 
+  - rpc
+  - electrumx
+  - rpcelx
+  
+- name: debug
+  set_fact:
+    rpc_user: "{{ bitcoinconf['content'] | b64decode | regex_search('user=(.*)') | regex_replace('user=', '') }}"
+  tags: 
+  - rpc
+  - electrumx
+  - rpcelx
+
 - name: copy electrum conf
-  copy:
+  template:
     src: files/electrumx.conf.j2
     dest: /etc/electrumx.conf
   tags:
     - etc
+    - rpc
     - electrumx
+    - rpcelx
 
-- name: Set electrumx up as daemon, load at boottime
+- name: Set electrumx up as daemon, load at boot
   systemd:
     name: electrumx
     state: restarted
@@ -73,4 +100,6 @@
   tags:
     - systemd
     - electrum
+    - rpc
+    - rpcelx
 

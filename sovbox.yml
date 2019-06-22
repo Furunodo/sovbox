@@ -22,12 +22,14 @@
       - libbz2-dev
       - liblz4-dev
       - libsnappy-dev
+    # Warning: random will return a different value every {{rpc_pass}} instance
     rpc_pass: "pass{{ 9999999999999999999999999 | random }}"
     rpc_user: "user{{ 9999999999999999999999999 | random }}"
-    
+
   roles:
     - bitcoind
     - electrumx
+    - sovbox
 
   tasks:
     - name: Upgrade packages
@@ -38,16 +40,3 @@
     - name: Install system packages
       apt: pkg={{ item }}
       with_items: "{{ system_apt_packages }}"
-
-# @todo move to sovbox role
-    - name: Disable empty password login
-      lineinfile: dest=/etc/ssh/sshd_config regexp="^#?PermitEmptyPasswords" line="PermitEmptyPasswords no"
-      # notify: restart sshd
-      
-    - name: print rpc_pass
-      debug: var=rpc_pass
-
-    - name: print rpc_user
-      debug: var=rpc_user
-
-    

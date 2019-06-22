@@ -1,0 +1,17 @@
+---
+-
+- name: Disable empty password login
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^#?PermitEmptyPasswords"
+    line: "PermitEmptyPasswords no"
+  tags:
+  - sovbox
+  
+- name: restart ssh
+  systemd:
+    name: ssh
+    state: restarted
+    enabled: yes
+  tags:
+  - sovbox
