@@ -1,5 +1,9 @@
 ---
 -
+- name: install packages for bitcoind 
+  apt: pkg={{ item }}
+  with_items: "{{ apt_packages }}"
+
 - name: Create bitcoind user, bitcoin core will run as bitcoind user
   user:
     name: bitcoind

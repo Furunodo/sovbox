@@ -1,0 +1,7 @@
+apt_packages:
+      - python3-setuptools
+      - python3-pip
+      - libbz2-dev
+      - liblz4-dev
+      - libsnappy-dev
+

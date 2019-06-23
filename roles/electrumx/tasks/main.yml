@@ -1,5 +1,9 @@
 ---
 -
+- name: Install packages for electrumx
+  apt: pkg={{ item }}
+  with_items: "{{ apt_packages }}"
+
 - name: create electrumx user
   user:
     name: electrumx
