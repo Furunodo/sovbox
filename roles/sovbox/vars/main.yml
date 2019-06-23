@@ -3,6 +3,7 @@
 
 system_apt_packages:
       - aptitude
+      - unattended-upgrades
       - git
       - build-essential
       - autoconf
