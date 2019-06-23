@@ -11,3 +11,8 @@ DAEMON_URL = http://{{rpc_user}}:{{rpc_pass}}@127.0.0.1:8332/
 COIN=BitcoinSegwit
 
 # See http://electrumx.readthedocs.io/en/latest/environment.html
+
+SERVICES=tcp://:50001,ssl://:50002,rpc://
+
+SSL_KEYFILE=/etc/electrumx/server.key
+SSL_CERTFILE=/etc/electrumx/server.crt

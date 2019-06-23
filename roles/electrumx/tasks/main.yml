@@ -65,7 +65,7 @@
   - electrumx
   - rpcelx
 
-- name: debug
+- name: get password to connect to bitcoind
   set_fact:
     rpc_pass: "{{ bitcoinconf['content'] | b64decode | regex_search('password=(.*)') | regex_replace('password=', '') }}"
   tags: 
@@ -73,7 +73,7 @@
   - electrumx
   - rpcelx
   
-- name: debug
+- name: get username to connect to bitcoind
   set_fact:
     rpc_user: "{{ bitcoinconf['content'] | b64decode | regex_search('user=(.*)') | regex_replace('user=', '') }}"
   tags: 
@@ -90,6 +90,35 @@
     - rpc
     - electrumx
     - rpcelx
+
+
+
+- name: electrumx generate ssl keys
+  shell: openssl genrsa -out server.key 2048
+  args:
+    chdir: /etc/electrumx
+    creates: /etc/electrumx/server.key
+  tags:
+    - electrumx
+    - elxssl
+
+- name: electrumx generate ssl keys
+  shell: yes '' | openssl req -new -key server.key -out server.csr
+  args:
+    chdir: /etc/electrumx
+    creates: /etc/electrumx/server.csr
+  tags:
+    - electrumx
+    - elxssl
+
+- name: electrumx generate ssl keys
+  shell: openssl x509 -req -days 1825 -in server.csr -signkey server.key -out server.crt
+  args:
+    chdir: /etc/electrumx
+    creates: /etc/electrumx/server.crt
+  tags:
+    - electrumx
+    - elxssl
 
 - name: Set electrumx up as daemon, load at boot
   systemd:
