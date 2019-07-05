@@ -122,5 +122,6 @@ No, but you're free to fork.
 
 ### Related projects
 
+- https://github.com/k3tan172/ubuntu-node-box An extensive guide to building your financial sovereignty on Ubuntu 18.04
 - https://github.com/lightning-power-users/node-launcher
 
