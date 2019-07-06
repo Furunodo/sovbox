@@ -1,0 +1,36 @@
+---
+- name: nodejs
+  include_role: name=nodejs
+
+# apt packages: python3-software-properties  software-properties-common nginx
+
+- name: npm install pm2
+  npm:
+    name: pm2
+    global: yes
+  tags:
+    - btcrpcxpl-install
+
+
+# Ran into this issue https://github.com/janoside/btc-rpc-explorer/issues/137
+#- name: npm install btc-rpc-explorer
+#  command: npm install -g btc-rpc-explorer
+#  tags:
+#   - btcrpcxpl-install
+
+
+# add-apt-repository ppa:certbot/certbot
+# apt update
+# apt upgrade
+# apt install python-certbot-nginx
+# Copy content from ./btc-explorer.com.conf into /etc/nginx/sites-available/btc-explorer.com.conf
+
+# certbot --nginx -d btc-explorer.com
+# cd /etc/ssl/certs
+# openssl dhparam -out dhparam.pem 4096
+# cd /home/bitcoin
+# git clone https://github.com/janoside/btc-rpc-explorer.git
+# cd /home/bitcoin/btc-rpc-explorer
+# npm install
+# npm run build
+# pm2 start bin/www --name "btc-rpc-explorer"
