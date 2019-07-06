@@ -1,5 +1,8 @@
 
 system_apt_packages:
-      - aptitude
-      - unattended-upgrades
-      - git
+ - aptitude
+ - unattended-upgrades
+ - git
+ - tor
+ - ufw
+ - fail2ban

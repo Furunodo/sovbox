@@ -1,5 +1,32 @@
 ---
 -
+- name: Firewall allow ssh
+  ufw:
+    port: ssh
+    rule: limit
+    proto: tcp
+    state: enabled
+  tags:
+  - firewall
+  - sovbox
+
+- name: Firewall default deny all incoming
+  ufw:
+    default: deny
+    direction: incoming
+  tags:
+  - firewall
+  - sovbox
+
+- name: Firewall default allow all outgoing
+  ufw:
+    default: allow
+    direction: outgoing
+  tags:
+  - firewall
+  - sovbox
+    
+
 - name: Disable empty password login
   lineinfile:
     dest: /etc/ssh/sshd_config
@@ -24,3 +51,28 @@
 - name: Install system packages
   apt: pkg={{ item }}
   with_items: "{{ system_apt_packages }}"
+
+- name: Add the user 'davidson' with a primary group of 'admin'
+  user:
+    name: davidson
+    comment: JD
+    group: admin
+    password: "{{ lookup('password', 'davidson-password.txt encrypt=md5_crypt') }}"
+  tags:
+    - davidson
+
+- name: mkdir /home/davidson/.ssh
+  file:
+    path: /home/davidson/.ssh
+    state: directory
+    owner: davidson
+    group: root
+    mode: 0700
+  tags:
+    - davidson
+
+- name: Copy /root/.ssh/authorized_keys
+  command: cp /root/.ssh/authorized_keys /home/davidson/.ssh/
+  tags:
+    - davidson
+  
