@@ -1,0 +1,28 @@
+---
+- name: nodejs
+  include_role: name=nodejs
+
+- name: install yarn
+  npm:
+    name: yarn
+    global: yes
+
+- name: create trezorwallet user
+  user:
+    name: trezorwallet
+    home: /home/trezorwallet
+    state: present
+
+- name: Git clone trezor-wallet repo
+  git:
+    repo: https://github.com/trezor/trezor-wallet
+    dest: /home/trezorwallet/trezor-wallet
+    version: 1.3.0-beta
+
+- name: Build and install trezor-wallet
+  shell: yarn
+  args:
+    chdir: /home/trezorwallet/trezor-wallet
+  tags:
+    - trezorbuild
+    
