@@ -59,6 +59,8 @@ to trust third parties
 - [x] mostly works on Ubuntu 18 LTS
 - [x] randomly generate RPC user/pass
 - [ ] testing on different machines
+- [ ] Vagrant, to set up a virtual machine
+- [ ] travis-ci.org
 - [ ] role: [Trezor full node](https://wiki.trezor.io/Full-node_wallet), with [Blockbook](https://wiki.trezor.io/User_manual-Running_a_local_instance_of_Trezor_Wallet_backend_(Blockbook))
 - [ ] checksums? verify code?
 - [ ] more tor https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md
