@@ -6,5 +6,6 @@
   roles:
     - sovbox
     - bitcoind
-    - electrumx
-
+    - { name: electrumx, tags: ['electrumx'] }
+    - { name: trezorwallet, tags: ['trezorwallet'] }
+    - { name: btc-rpc-explorer, tags: ['btc-rpc-explorer'] }
