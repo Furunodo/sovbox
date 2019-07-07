@@ -118,8 +118,9 @@ No, but you're free to fork.
 
 ## Useful resources
 
-- https://bitzuma.com/posts/compile-bitcoin-core-from-source-on-ubuntu/
+- https://bitcoin-only.com
 - https://stephanlivera.com/
+- https://bitzuma.com/posts/compile-bitcoin-core-from-source-on-ubuntu/
 
 
 ### Related projects
