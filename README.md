@@ -42,6 +42,7 @@ code well.
 
 4. run `ansible-playbook -v sovbox.yml` from `sovbox/`
 
+5. bonus: [Run more than one node, some public, some private 😉](https://twitter.com/wiz/status/1149934989737246720)
 
 
 ## How we create sovbox
@@ -67,6 +68,7 @@ to trust third parties
 - [ ] role: [samurai dojo](https://github.com/Samourai-Wallet/samourai-dojo/blob/master/doc/DOCKER_setup.md)
 - [ ] role: [btcpayserver](https://github.com/btcpayserver/btcpayserver)
 - [ ] role: [lightning watchtower](https://medium.com/@wbobeirne/testing-out-watchtowers-with-a-simulated-breach-f1ad22c01112)?
+- [ ] blockstream satellite support? fetch lightning messages and serve them through website?
 - [ ] noob-friendly docs
 
 
@@ -74,7 +76,7 @@ to trust third parties
 
 ### What do I need to run this?
 
-A machine running Linux and has enough disk space, that you can ssh
+A machine running Linux and has enough disk space, that you can `ssh`
 into.
 
 
