@@ -2,6 +2,16 @@
 -
 - name: Firewall 
   ufw:
+    port: '50001'  # Not sure if 50001 needs to be open
+    rule: limit
+    proto: tcp
+    state: enabled
+  tags:
+  - firewall
+  - electrumx
+
+- name: Firewall 
+  ufw:
     port: '50002'
     rule: limit
     proto: tcp
@@ -9,7 +19,8 @@
   tags:
   - firewall
   - electrumx
-    
+
+  
 - name: Install packages for electrumx
   apt: pkg={{ item }}
   with_items: "{{ apt_packages }}"
