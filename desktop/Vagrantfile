@@ -1,0 +1,20 @@
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.hostname = "guisovbox"
+  
+  config.vm.provision "shell", inline: "date -s \"$(curl -I google.com 2>&1 | grep Date: | cut -d' ' -f3-6)Z\""
+  
+  config.vm.provider "virtualbox" do |vb|
+    # Display the VirtualBox GUI when booting the machine
+    vb.gui = true
+  end
+
+  # Install xfce and virtualbox additions
+  config.vm.provision "shell", inline: "sudo apt-get update"
+  config.vm.provision "shell", inline: "sudo apt-get install -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11"
+  # Permit anyone to start the GUI
+  config.vm.provision "shell", inline: "sudo sed -i 's/allowed_users=.*$/allowed_users=anybody/' /etc/X11/Xwrapper.config"
+
+  # snap install electrum
+  
+end
