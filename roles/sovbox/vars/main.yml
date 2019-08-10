@@ -6,3 +6,5 @@ system_apt_packages:
  - tor
  - ufw
  - fail2ban
+# - snort
+ - aide
