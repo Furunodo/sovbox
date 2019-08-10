@@ -62,7 +62,6 @@ to trust third parties
 - [ ] testing on different machines
 - [ ] Vagrant, to set up a virtual machine
 - [ ] travis-ci.org
-- [ ] role: [Trezor full node](https://wiki.trezor.io/Full-node_wallet), with [Blockbook](https://wiki.trezor.io/User_manual-Running_a_local_instance_of_Trezor_Wallet_backend_(Blockbook))
 - [ ] checksums? verify code?
 - [ ] more tor https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md
 - [ ] role: [samurai dojo](https://github.com/Samourai-Wallet/samourai-dojo/blob/master/doc/DOCKER_setup.md)

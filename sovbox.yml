@@ -7,5 +7,4 @@
     - sovbox
     - bitcoind
     - { name: electrumx, tags: ['electrumx'] }
-    - { name: trezorwallet, tags: ['trezorwallet'] }
     - { name: btc-rpc-explorer, tags: ['btc-rpc-explorer'] }
