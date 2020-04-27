@@ -37,10 +37,10 @@
     - systemd
     - electrumx
 
-- name: electrumx, pip install rocksdb
-  shell: pip3 install python-rocksdb
-  tags:
-    - electrumx
+#- name: electrumx, pip install rocksdb
+#  shell: pip3 install python-rocksdb
+#  tags:
+#    - electrumx
 
 - name: Git clone electrumx repo
   git:
@@ -60,7 +60,7 @@
     
 - name: electrum db
   file:
-    path: /var/lib/electrum-db
+    path: /var/lib/electrumx-db
     owner: electrumx
     state: directory
   tags:
